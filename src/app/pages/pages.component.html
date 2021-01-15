@@ -1,0 +1,35 @@
+<!-- SOLO se muestra cuando este autenticado -->
+
+<div id="main-wrapper">
+    <app-header></app-header>
+    <app-sidebar></app-sidebar>
+    <!-- DESDE pages-blank.html (03-original/main/pages-blank.html) -->
+    <div class="page-wrapper">
+        <div class="container-fluid">
+
+            <!-- Breadcrumbs -->
+            <app-breadcrumbs></app-breadcrumbs>
+
+            <!-- Mi sistema de RUTAS -->
+
+            <!-- Start Page Content -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+
+                            <!-- todo Mi router-outlet -->
+                            <router-outlet></router-outlet>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End Page Content -->
+        </div>
+
+        <!-- footer -->
+        <footer class="footer">© 20XX Admin Pro by wrappixel.com</footer>
+        <!-- End footer -->
+    </div>
+</div>

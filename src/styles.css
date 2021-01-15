@@ -1,0 +1,7 @@
+/* .animated tomado desde archivo style.css ../css/animate.css y personalizado .fast -> aplicar en header.component.html */
+.fast{
+    -webkit-animation-duration:0.5s;
+    animation-duration:0.5s;
+    -webkit-animation-fill-mode:both;
+    animation-fill-mode:both
+}

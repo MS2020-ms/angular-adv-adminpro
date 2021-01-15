@@ -5,10 +5,10 @@
 - >ng cd adminpro
 - >ng serve -o (modo desarrollo para ver cambios en tiempo real)(-o abre en navegador)
 - Navegador: http://localhost:4200/
-# autenticacion
+# componentes autenticacion
 - >ng g c auth/login --skipTests -is
 - >ng g c auth/register --skipTests -is
-# paginas
+# componentes paginas
 - >ng g c pages/error404 --skipTests -is
 - >ng g c pages/dashboard --skipTests -is
 - >ng g c pages/progress --skipTests -is
@@ -46,7 +46,7 @@
 - >git tag -a v1.0.0 -m "Diseno listo"
 - >git tag
 - >git push --tags
-- Editar tag en Github
+- Editar tag en Github en un release de produccion
 
 ### Compartimentacion de Modulos = ENCAPSULAR nuestro CODIGO
 - >ng g m pages/pages --flat
@@ -59,3 +59,31 @@
 
 ### Editar rutas con path especifico
 - ruta dashboard/progress y ruta dashboard/grafica1 -> pages.routing.ts y app-routing.module.ts
+
+### Subir cambios a Github
+- >git add . (local)
+- >git commit -m "Router - Seccion 4" (local)
+- >git push (subir Github)
+- >git remote -v (ruta a mi repo en github)
+# tag
+- >git tag
+- >git tag -a v1.5.0 -m "Rutas listo"
+- >git push --tags (subir Github)
+- Editar tag en Github en un release de produccion
+
+### Back-Up desde Github
+- 1.bajarme desde Github Releases (latest): -> Source code (zip)
+    sin carpeta node_modules (>npm install)  
+    sin carpeta git
+- 2.clonar proyecto de Github:
+    Github Code/https (copiar)
+    Terminal >git clone 'pegar url'
+    sin carpeta node_modules (>npm install)  
+    con carpeta git
+    >git log (ver todos los commit)
+
+### Centralizar Componentes compartidos en otros componentes
+- Crear carpeta components y modulo
+- >ng g m components/components --flat
+- Crear componente (vinculado al modulo anterior y NO al app.module.ts)
+- >ng g c components/incrementador --skipTests -is

@@ -4,22 +4,20 @@
             <div class="card-body">
 
                 <!-- 1° Barra de porcentaje active -->
-                <h4 class="card-title">Striped Progress bar</h4>
+                <h4 class="card-title">Striped Progress bar 1 = {{progreso1}}%</h4>
                 <div class="progress m-t-20">
                     <!-- Asigno width de barra porcentaje mediante get []= recibe valores -->
                     <div class="progress-bar bg-primary progress-bar-striped active" style=" height:5px;"
-                        role="progressbar">
-                        <!-- [style.width]="getPorcentaje" -->
-
+                        [style.width]="getProgreso1" role="progressbar">
                     </div>
                 </div>
 
                 <!-- 2° Barra de porcentaje active -->
+                <h4 class="card-title mt-4">Striped Progress bar 2 = {{progreso2}}%</h4>
                 <div class="progress m-t-20">
                     <!-- Asigno width de barra porcentaje mediante get []= recibe valores -->
                     <div class="progress-bar bg-info progress-bar-striped active" style=" height:5px;"
-                        role="progressbar">
-                        <!-- [style.width]="getPorcentaje" -->
+                        [style.width]="getProgreso2" role="progressbar">
                     </div>
                 </div>
 
@@ -34,7 +32,10 @@
             <div class="card-body">
 
                 <!-- componente repetido pero independiente, que se utilizara en otros lugares o componentes -->
-                <app-incrementador></app-incrementador>
+                <!-- Emito valorSalida desde Hijo-incrementador ()= emite valores o cambio-valor -->
+                <!-- Recibo valor desde Padre-progress []= recibe valor inicial -->
+                <app-incrementador (valorSalida)="progreso1 = $event" [progreso]="progreso1">
+                </app-incrementador>
 
             </div>
         </div>
@@ -45,7 +46,9 @@
             <div class="card-body">
 
                 <!-- componente repetido pero independiente, que se utilizara en otros lugares o componentes -->
-                <app-incrementador></app-incrementador>
+                <!-- btnClass = con llaves cuadradas [] = "'xxx'" como string literal-->
+                <app-incrementador (valorSalida)="progreso2 = $event" [progreso]="progreso2" [btnClass]="'btn-info'">
+                </app-incrementador>
 
             </div>
         </div>

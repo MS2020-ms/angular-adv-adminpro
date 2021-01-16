@@ -14,7 +14,7 @@
 - >ng g c pages/progress --skipTests -is
 - >ng g c pages/grafica1 --skipTests -is 
 - >ng g c pages/pages --flat --skipTests -is ( SOLO se muestra cuando este autenticado)
-# componentes reutilizables en aplicacion (en pages) = elemntos de uso comun
+# componentes reutilizables en mi aplicacion (en pages) = elemntos de uso comun
 - >ng g c shared/breadcrumbs --skipTests -is
 - >ng g c shared/sidebar --skipTests -is
 - >ng g c shared/header --skipTests -is
@@ -87,3 +87,21 @@
 - >ng g m components/components --flat
 - Crear componente (vinculado al modulo anterior y NO al app.module.ts)
 - >ng g c components/incrementador --skipTests -is
+- Exportar en components.module para utilizarlo en otros componentes -> progress
+
+### @Input pages/progress (padre) -> components/incrementador (hijo)
+### @Output components/incrementador (hijo) -> pages/progress (padre)  
+
+### Cambio propiedad forma condicional ngClass (incrementador)
+
+### Graficas en Angular
+- https://valor-software.com/ng2-charts/#/GeneralInfo
+- Terminal
+  >npm install --save ng2-charts
+  >npm install --save chart.js
+- importar ChartsModule en components.module (donde esta doughnut.component) -> SOLO donde lo voy a utilizar si es en toda la aplicacion, entonces en app.module
+- Componente doughnut
+
+### Nuevo componente reutilizable grafica-doughnut
+- ng g c components/doughnut --skipTests -is
+- Exportar en components.module para utilizarlo en otros componentes -> grafica1 

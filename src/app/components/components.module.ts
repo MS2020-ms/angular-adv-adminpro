@@ -2,21 +2,27 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IncrementadorComponent } from './incrementador/incrementador.component';
 import { FormsModule } from '@angular/forms';
+import { DoughnutComponent } from './doughnut/doughnut.component';
 
-
+//importar graficas para Angular desde https://valor-software.com/ng2-charts/#/GeneralInfo
+//SOLO en components.module donde lo voy a utilizar si es en toda la aplicacion, entonces en app.module
+import { ChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [
-    IncrementadorComponent
+    IncrementadorComponent,
+    DoughnutComponent
   ],
   //Lo exporto porque voy a necesitar estos componentes fuera de este modulo 
   exports: [
-    IncrementadorComponent
+    IncrementadorComponent,
+    DoughnutComponent
   ],
-  //import FormsModule (xa usar ngModel desde progress html)
+  //import FormsModule (xa usar ngModel desde progress html), ChartsModule
   imports: [
     CommonModule,
-    FormsModule
+    FormsModule,
+    ChartsModule
   ]
 })
 //importar ComponentsModule en archivo pages.module.ts [Donde los voy a utilizar]

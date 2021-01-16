@@ -2,17 +2,23 @@
 <div class="d-inline-flex">
     <span class="input-group-btn">
         <!-- Funcion click ()= emite valores-->
-        <button class="btn btn-primary" type="button" (click)="cambiarValor(-5)">
+        <button type="button" (click)="cambiarValor(-5)" [ngClass]="btnClass">
             <i class="fa fa-minus"> 5</i>
         </button>
     </span>
 
     <!-- [()]= emite y recibe valores. El enlace creado con ngModel permite que desde la vista pueda usar un dato. Asignándole el valor que tenemos declarado en el componente. En este caso tendremos que importar "FormsModule" en el módulo pages.module.ts-->
-    <input type="number" class="form-control" placeholder="Progreso" min="0" max="100" [(ngModel)]="progreso">
+    <!-- Enlace bidireccional [(...)]. El enlace bidireccional le brinda a su aplicación una forma de compartir datos entre una clase de componente (.ts) y su plantilla(.html). -->
+    <!-- [(ngModel)] = valor inicial progreso en input -->
+    <!-- (ngModelChange) = cambio valor manualmente en input -->
+    <!-- [ngClass] = borde input en rojo -->
+
+    <input type="number" class="form-control" placeholder="Progreso" min="0" max="100" [(ngModel)]="progreso"
+        (ngModelChange)="onChange($event)" [ngClass]="{'is-invalid': progreso > 100 || progreso < 0}">
 
     <span class="input-group-btn">
         <!-- Funcion click ()= emite valores-->
-        <button class="btn btn-primary" type="button" (click)="cambiarValor(+5)">
+        <button [ngClass]="btnClass" type="button" (click)="cambiarValor(+5)">
             <i class=" fa fa-plus"> 5</i>
         </button>
     </span>

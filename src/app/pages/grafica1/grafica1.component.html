@@ -1,15 +1,17 @@
 <div class="row">
     <div class="col-6">
+        <!-- Asigno valor title al componente doughnut -->
         <app-doughnut title="Ventas"></app-doughnut>
     </div>
     <div class="col-6">
-        <app-doughnut [labels]="labels1" [data]="data1"></app-doughnut>
+        <!-- Recibo [] ts->html valores label1 y data1 del Padre al componente doughnut -->
+        <app-doughnut title="Compras" [labels]="labels1" [data]="data1"></app-doughnut>
     </div>
 </div>
 
 <div class="row">
     <div class="col-6">
-        <app-doughnut></app-doughnut>
+        <app-doughnut title="Ingresos"></app-doughnut>
     </div>
     <div class="col-6">
         <app-doughnut></app-doughnut>

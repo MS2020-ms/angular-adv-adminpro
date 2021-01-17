@@ -102,6 +102,6 @@
 - importar ChartsModule en components.module (donde esta doughnut.component) -> SOLO donde lo voy a utilizar si es en toda la aplicacion, entonces en app.module
 - Componente doughnut
 
-### Nuevo componente reutilizable grafica-doughnut
+### Nuevo componente reutilizable:  grafica-doughnut
 - ng g c components/doughnut --skipTests -is
 - Exportar en components.module para utilizarlo en otros componentes -> grafica1 

@@ -1,7 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common'; //crea las directivas de ngFor ngIf
+import { RouterModule } from '@angular/router';
+
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
+import { FormsModule } from '@angular/forms';
+
 
 //Modulo independiente de las rutas abiertas:
 
@@ -15,8 +19,11 @@ import { LoginComponent } from './login/login.component';
     LoginComponent,
     RegisterComponent
   ],
+  //Importo RouterModule, FormsModule
   imports: [
-    CommonModule
+    CommonModule,
+    RouterModule,
+    FormsModule
   ]
 })
 //importar AuthModule en archivo app.module.ts

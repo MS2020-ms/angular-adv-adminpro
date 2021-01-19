@@ -66,7 +66,7 @@
 - >git push (subir Github)
 - >git remote -v (ruta a mi repo en github)
 # tag
-- >git tag
+- >git tag (ver listado de tags anteriores)
 - >git tag -a v1.5.0 -m "Rutas listo"
 - >git push --tags (subir Github)
 - Editar tag en Github en un release de produccion
@@ -103,5 +103,28 @@
 - Componente doughnut
 
 ### Nuevo componente reutilizable:  grafica-doughnut
-- ng g c components/doughnut --skipTests -is
+- >ng g c components/doughnut --skipTests -is
 - Exportar en components.module para utilizarlo en otros componentes -> grafica1 
+
+### Nuevo componente Ajustes de usuario : account settings
+- >ng g c pages/accountSettings --skipTests -is
+- cambiar css principal de forma dinamica
+
+### Cambiar clase CSS sin usar ngClass (colocar check en caja seleccionada) : account settings
+
+### Service para : account settings (con LocalStorage)
+- >ng g s services/settings --skipTests
+- Inyecto mi servicio en constructor -> pages.component.ts
+- Inyecto mi servicio en constructor -> account-settings.component.ts
+- Trabajo mis funciones desde mi servicio
+### Service para : sidebar
+- >ng g s services/sidebar --skipTests
+- Inyecto mi servicio en constructor -> sidebar.component.ts
+- *ngFor -> sidebar.html 
+- *ngFor of item.submenu -> sidebar.html 
+
+### RouterLink - ir a una ruta : sidebar
+- Ir a sidebar.component.htm y header.component.htm
+- Importar el router en shared.module.ts
+- Ir a login.html y login.ts
+- Importar el RouterModule y FormsModule en auth.module.ts

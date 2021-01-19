@@ -12,6 +12,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProgressComponent } from './progress/progress.component';
 import { Grafica1Component } from './grafica1/grafica1.component';
 import { PagesComponent } from './pages.component';
+import { AccountSettingsComponent } from './account-settings/account-settings.component';
 
 
 //Modulo independiente de las rutas autenticadas:
@@ -21,14 +22,16 @@ import { PagesComponent } from './pages.component';
     DashboardComponent,
     ProgressComponent,
     Grafica1Component,
-    PagesComponent
+    PagesComponent,
+    AccountSettingsComponent
   ],
-  //Lo exporto por si necesito estos componentes fuera de este modulo (pages.module.ts)
+  //Los exportos por si necesito estos componentes fuera de este modulo (pages.module.ts)
   exports: [
     DashboardComponent,
     ProgressComponent,
     Grafica1Component,
-    PagesComponent
+    PagesComponent,
+    AccountSettingsComponent
   ],
   //import FormsModule (xa usar ngModel desde progress html), RouterModule, ComponentsModule, SharedModule [SOLO donde los voy a utilizar]
   imports: [

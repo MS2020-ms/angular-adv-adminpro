@@ -69,6 +69,7 @@
 - >git tag (ver listado de tags anteriores)
 - >git tag -a v1.5.0 -m "Rutas listo"
 - >git push --tags (subir Github)
+- >git remote -v (url del repositorio)
 - Editar tag en Github en un release de produccion
 
 ### Back-Up desde Github
@@ -128,3 +129,23 @@
 - Importar el router en shared.module.ts
 - Ir a login.html y login.ts
 - Importar el RouterModule y FormsModule en auth.module.ts
+
+### Obsevables y Promesas
+- nuevo componente 
+  >ng g c pages/promesas --skipTests -is
+- Anado nuevo link en sidebar (ir sidebar.service)
+- https://reqres.in/
+
+### rxjs
+- nuevo componente 
+  >ng g c pages/rxjs --skipTests -is
+- Anado nuevo link en sidebar (ir sidebar.service)
+
+### crear Observable manualmente - componente rxjs.ts
+### metodo retry()
+### operador map() xa trasformar la salida de un observable 
+### operador filter() xa trasformar la salida de un observable 
+### llamar al unsubscribe()
+### bradcrums usando observables
+- enviar nombre de la ruta con propiedad 'data' en pages.routing.ts
+- shared/breadcrumbs recupero la data con un observable y coloco en html nombre de la ruta

@@ -35,8 +35,11 @@
 
                     <ul aria-expanded="false" class="collapse">
                         <!-- *ngFor of item.submenu-->
+                        <!-- routerLinkActive="active" al seleccionar un link de mi sidebar se muestra como activo en blanco (viene del bootstrap) -->
+                        <!-- [routerLinkActiveOptions]="{exact: true}" para que no se vea main siempre activo (ya que el comienzo /dashboard siempre coincide) -->
                         <li *ngFor="let subMenuItem of item.submenu">
-                            <a [routerLink]="subMenuItem.url">{{subMenuItem.titulo}} </a>
+                            <a [routerLink]="subMenuItem.url" routerLinkActive="active"
+                                [routerLinkActiveOptions]="{exact: true}">{{subMenuItem.titulo}} </a>
                         </li>
                     </ul>
                 </li>

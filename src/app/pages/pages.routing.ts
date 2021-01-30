@@ -1,6 +1,9 @@
 
 import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
+
+import { AuthGuard } from '../guards/auth.guard';
+
 import { PagesComponent } from './pages.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProgressComponent } from './progress/progress.component';
@@ -9,11 +12,14 @@ import { AccountSettingsComponent } from './account-settings/account-settings.co
 import { PromesasComponent } from './promesas/promesas.component';
 import { RxjsComponent } from './rxjs/rxjs.component';
 
+
 const routes: Routes = [
 
     //Rutas protegidas - rutas hijas (segento de rutas)
     {
-        path: 'dashboard', component: PagesComponent,
+        path: 'dashboard',
+        component: PagesComponent,
+        canActivate: [AuthGuard], //Protejo todas las rutas, sino logado -> no paso
         children: [
             //para enviar parametros o argumentos por la ruta -> propiedad 'data'
             { path: '', component: DashboardComponent, data: { titulo: 'Dashboard' } },

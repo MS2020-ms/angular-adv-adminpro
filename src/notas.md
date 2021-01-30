@@ -1,3 +1,5 @@
+#### Arrnacar proyecto
+- >ng serve -o 
 #### Inicio
 - Terminal:
 - >ng help (comandos de angular cli)
@@ -149,3 +151,90 @@
 ### bradcrums usando observables
 - enviar nombre de la ruta con propiedad 'data' en pages.routing.ts
 - shared/breadcrumbs recupero la data con un observable y coloco en html nombre de la ruta
+
+### BACKEND ###
+
+### Crear Modelo de Usuario
+- crear nueva carpeta models
+- crear archivo models/usuario.model.ts
+
+### Formulario de registro -Reactive forms
+- ir auth/login/login.html
+- ir auth/register/register.html
+- ir auth/auth.module.ts -> importar ReactiveFormsModule
+- ir register.ts y definir formulario
+- ir register.html
+# Validaciones de formularios
+- ir register.ts
+- ir register.html -> textos de aviso
+# Validacion de password y repetir password
+- ir register.ts -> metodo contrasenasNoValidas()
+- ir register.html -> textos de aviso
+
+### Grabar usuario en BD
+- crear servicio
+  >ng g s services/usuario --skipTests
+- importar en auth.module.ts -> HttpClientModule
+- inyecto en constructor de register.ts -> private usuarioServive: UsuarioService
+  y realizar el posteo
+- creo nueva carpeta interfaces y nuevo archivo register-form.interface.ts
+- insertar en enviroments/enviroments.ts -> base_url: 'http://localhost:3000/api'
+- insertar en enviroments/enviroments.prod.ts -> base_url: 'http://localhost:3000/api'
+- creo metodo crearUsuario en usuario.service.ts
+
+### SweetAlert2
+- https://sweetalert2.github.io/
+- >npm install sweetalert2
+- en register.ts -> import Swal from 'sweetalert2'
+- si da error -> import * as Swal from 'sweetalert';
+- ejemplos de sweetalert en https://sweetalert2.github.io/ - examples
+
+### Login de usuario - normal
+- ir login.html
+- ir login.ts
+- ir usuario.service.ts -> metodo login -> defino ruta
+- creo nuevo archivo interfaces/login-form.interface.ts
+# funcion Remember Me
+- al seleccionar en checkbox el Remember Me, guardo el email en el LS. Para poderlo leer y reestablecer el el campo
+- ir login.ts
+
+### Guardar informacion en el LocalStorage
+- Al hacer login, recibo token, que quiero guardar en LS
+- ir usuarios.service.ts 
+  import {tap} from 'rxjs/operators'
+
+### Login de usuario - Google Sign-In
+- Obtener el token de una autenticacion Google Sign-In
+- Ir a https://developers.google.com/identity/sign-in/web/sign-in -> Customize the Sign-In Button
+- en index.html -> 
+<meta name="google-signin-client_id" content="YOUR_CLIENT_ID.apps.googleusercontent.com">
+<script src="https://apis.google.com/js/platform.js"></script>
+ YOUR_CLIENT_ID ver notas.md del BACKEND or https://developers.google.com/identity/sign-in/web/sign-in -> Go to the Credentials page.
+- en login.html pegar boton de google Sign-In <div id="my-signin2"></div>
+- en login.ts pegar metodos -> onSuccess() y onFailure() y renderButton() y declare const gapi: any;
+- en login.ts -> ngOnInit(): void {this.renderButton();}
+- ir a https://developers.google.com/identity/sign-in/web/sign-in -> Go to the Credentials page.
+  Credenciales -> ID de clientes OAuth 2.0 / Angular-adv Google-Sign-In
+  + Agregar URI -> http://localhost:4200 y GUARDAR
+- ir a https://developers.google.com/identity/sign-in/web/sign-in -> Authenticate with a Backend Server
+  en login.ts onSuccess -> var id_token = googleUser.getAuthResponse().id_token;
+
+# usar el token de Google para autenticarse
+- en login.ts elimino onSuccess() y onFailure() [solo si trabajo con VanillaJS sin Class]
+- Ir a https://developers.google.com/identity/sign-in/web/sign-in -> Customize the Sign-In Button -> copio var startApp = function() {...
+- en login.ts -> pego
+- YOUR_CLIENT_ID ver notas.md del BACKEND or https://developers.google.com/identity/sign-in/web/sign-in -> Go to the Credentials page.
+
+- ir usuario.service.ts -> metodo loginGoogle -> defino ruta
+
+### Proteger rutas - GUARD , solo cuando estoy autenticado puedo entrar a pagina dashboard
+- >ng g guard guards/auth --skipTests -> (*) canActivate
+- ir auth.guard.ts
+- ir pages/pages.routing.ts
+- ir usuarios.service.ts
+- ir login.ts
+
+### Log-Out
+- ir usuarios.service.ts
+- ir shared/headers.ts
+- ir shared/headers.html

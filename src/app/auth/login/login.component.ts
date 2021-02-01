@@ -21,7 +21,7 @@ export class LoginComponent implements OnInit {
   public auth2: any;
 
   public loginForm = this.fb.group({
-    email: [localStorage.getItem('email_a_fh') || '', [Validators.required, Validators.email]], //o con expresion regular
+    email: [localStorage.getItem('email_a_fh') || '@gmail.com', [Validators.required, Validators.email]], //o con expresion regular
     password: ['', Validators.required],
     remember: [false] //cuando checkeo el checkbox se vuelve true
   });

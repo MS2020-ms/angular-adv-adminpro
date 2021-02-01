@@ -160,7 +160,8 @@
                                     </a>
                                     <!-- Message -->
                                     <a href="#">
-                                        <div class="user-img"> <img src="./assets/images/users/4.jpg" alt="user"
+                                        <!-- IMAGEN DEL USUARIO -->
+                                        <div class="user-img"> <img src="./assets/images/users/1.jpg" alt="user"
                                                 class="img-circle"> <span
                                                 class="profile-status offline pull-right"></span> </div>
                                         <div class="mail-contnet">
@@ -197,28 +198,38 @@
                 <!-- Profile -->
                 <!-- ============================================================== -->
                 <li class="nav-item dropdown">
+                    <!-- IMAGEN DEL USUARIO src="./assets/images/users/1.jpg"-->
                     <a class="nav-link dropdown-toggle waves-effect waves-dark" href="" data-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false"><img src="./assets/images/users/1.jpg" alt="user"
-                            class="profile-pic" /></a>
+                        aria-haspopup="true" aria-expanded="false">
+                        <img [src]="usuario.imagenUrl" alt="user" class="profile-pic" />
+                    </a>
                     <div class="dropdown-menu dropdown-menu-right animated fadeIn fast">
                         <ul class="dropdown-user">
                             <li>
                                 <div class="dw-user-box">
-                                    <div class="u-img"><img src="./assets/images/users/1.jpg" alt="user"></div>
+                                    <!-- IMAGEN DEL USUARIO src="./assets/images/users/1.jpg"-->
+                                    <!-- NOMBRE DE USUARIO -->
+                                    <!-- EMAIL DE USUARIO -->
+                                    <div class="u-img"><img [src]="usuario.imagenUrl" alt="user"></div>
                                     <div class="u-text">
-                                        <h4>Steave Jobs</h4>
-                                        <p class="text-muted">varun@gmail.com</p><a href="pages-profile.html"
-                                            class="btn btn-rounded btn-danger btn-sm">View Profile</a>
+                                        <h4>{{usuario.nombre}}</h4>
+                                        <!-- xa EMAILS largos cortar y anadir ... -->
+                                        <p class="text-muted">
+                                            {{usuario.email | slice:0:20}}{{(usuario.email.length > 20) ? '...' : ''}}
+                                        </p>
+                                        <a href="pages-profile.html" class="btn btn-rounded btn-danger btn-sm">View
+                                            Profile</a>
                                     </div>
                                 </div>
                             </li>
                             <li role="separator" class="divider"></li>
-                            <li><a href="#"><i class="ti-user"></i> My Profile</a></li>
+                            <!-- navegacion con routerLink /dashboard/perfil or ./perfil -->
+                            <li><a routerLink="./perfil"><i class="ti-user"></i> Mi Perfil</a></li>
                             <li><a href="#"><i class="ti-wallet"></i> My Balance</a></li>
                             <li><a href="#"><i class="ti-email"></i> Inbox</a></li>
                             <li role="separator" class="divider"></li>
-                            <li><a routerLink="/dashboard/account-settings"><i class="ti-settings"></i> Account
-                                    Setting</a></li>
+                            <li><a routerLink="/dashboard/account-settings"><i class="ti-settings"></i> Ajustes de
+                                    fondo</a></li>
                             <li role="separator" class="divider"></li>
                             <li>
                                 <!-- activo metodo logout del ts->service -->

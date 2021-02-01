@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common'; //crea las directivas de ngFor ngIf
 import { RouterModule } from '@angular/router';
 //equivale: //import { AppRoutingModule } from '../app-routing.module'; 
-import { FormsModule } from '@angular/forms'; //importar xa usar ngModule en html
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'; //importar xa usar ngModule en html
 
 //Modulos:
 import { SharedModule } from '../shared/shared.module';
@@ -15,6 +15,7 @@ import { PagesComponent } from './pages.component';
 import { AccountSettingsComponent } from './account-settings/account-settings.component';
 import { PromesasComponent } from './promesas/promesas.component';
 import { RxjsComponent } from './rxjs/rxjs.component';
+import { PerfilComponent } from './perfil/perfil.component';
 
 
 //Modulo independiente de las rutas autenticadas:
@@ -27,7 +28,8 @@ import { RxjsComponent } from './rxjs/rxjs.component';
     PagesComponent,
     AccountSettingsComponent,
     PromesasComponent,
-    RxjsComponent
+    RxjsComponent,
+    PerfilComponent
   ],
   //Los exportos por si necesito estos componentes fuera de este modulo (pages.module.ts)
   exports: [
@@ -41,6 +43,7 @@ import { RxjsComponent } from './rxjs/rxjs.component';
   imports: [
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     SharedModule,
     RouterModule,
     ComponentsModule

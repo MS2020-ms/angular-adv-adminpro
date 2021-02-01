@@ -9,6 +9,7 @@ import { environment } from 'src/environments/environment';
 
 import { LoginForm } from '../interfaces/login-form.interface';
 import { RegisterForm } from '../interfaces/register-form.interface';
+import { Usuario } from '../models/usuario.model';
 
 const base_url = environment.base_url;
 
@@ -20,6 +21,8 @@ declare const gapi: any;
 export class UsuarioService {
 
   public auth2: any;
+  //xa guardar toda la informacion del usuario tras validar token
+  public usuario: Usuario;
 
   constructor(private http: HttpClient,
     private router: Router,
@@ -27,6 +30,16 @@ export class UsuarioService {
 
     this.googleInit();
   }
+
+  //getter para recuperar token desde LS
+  get token(): string {
+    return localStorage.getItem('token_a_fh') || '';
+  }
+
+  //getter para recuperar uid desde token
+  // get uid(): string {
+  //   return this.usuario.uid || '';
+  // }
 
   googleInit() {
 
@@ -57,20 +70,31 @@ export class UsuarioService {
 
   //validar y renovar token antes de pasar por Guard (retorna un true o false)
   validarToken(): Observable<boolean> {
-    const token = localStorage.getItem('token_a_fh') || '';
+    //const token = localStorage.getItem('token_a_fh') || '';
     //peticion a mi BACKEND
     return this.http.get(`${base_url}/login/renew`, {
       headers: {
-        'x-token': token
+        'x-token': this.token
       }
       //guardar el nuevo token en LS
     }).pipe(
-      tap((resp: any) => {
-        localStorage.setItem('token_a_fh', resp.token)
+      map((resp: any) => {
+
+        //console.log(resp);
+        //en el token dispongo de toda la informacion del usuario
+        //determino imagen por defecto
+        const { nombre, email, google, img = '', role, user_id } = resp.usuario;
+        this.usuario = new Usuario(nombre, email, '', img, google, role, user_id);
+        this.usuario.imprimirUsuario(); //metodo -> model/usuario.model.ts
+
+        //console.log(this.usuario);
+
+        localStorage.setItem('token_a_fh', resp.token);
+        return true
       }),
       //convertir la respuesta en boolean
       //map function to return 1 boolean value!!!
-      map(resp => true),
+      //OPCION 2: map(resp => true); -> en linea 71 en lugar de un 'map' un 'tap'
       catchError(error => of(false))
     );
   }
@@ -88,6 +112,18 @@ export class UsuarioService {
           localStorage.setItem('token_a_fh', resp.token)
         })
       )
+  }
+
+  actualizarPerfil(data: { nombre: string, email: string, role: string }) {
+    data = {
+      ...data,
+      role: this.usuario.role
+    }
+    return this.http.put(`${base_url}/usuarios/${this.usuario.user_id}`, data, {
+      headers: {
+        'x-token': this.token
+      }
+    });
   }
 
   login(formData: LoginForm) {

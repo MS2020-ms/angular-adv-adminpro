@@ -238,3 +238,45 @@
 - ir usuarios.service.ts
 - ir shared/headers.ts
 - ir shared/headers.html
+
+### Centralizar y recuperar la informacion del usuario logado
+- ir usuarios.service.ts en metodo validar token
+
+### Mostar imagen y nombre del perfil de usuario en header y sidebar
+- ir usuario.model.ts
+- ir shared/header.html
+- ir shared/header.ts
+
+### Optimizaciones del Email largos (igual para el nombre)
+- si el email es muy largo descuadra el montaje:
+- ir header.html -> pipe de 0 a 20 caracteres -> {{usuario.email | slice:0:20}}
+- colocar ... tras los emails largos cortados
+- anadir -> {{(usuario.email.length > 20) ? '...' : ''}}
+
+### Crear pagina del perfil del usuario
+- puedo cambiar mi nombre usuario, email y foto
+- creo nuevo componente
+  >ng g c pages/perfil --skipTests -is
+- mostrar el componente cuando hago click en sidebar/My Profile
+- en pages.routing.ts creo nueva ruta
+- en sidebar.html -> navegacion con routerLink
+- en header.html -> navegacion con routerLink
+- ir perfil.html
+# Actualizar el perfil del usuario
+- importar ReactiveFormsModule en pages.module.ts
+- ir perfil.ts
+- ir perfil.html
+- ir usuario.service.ts -> actualizarPerfil() y defino ruta del BACKEND
+# Servicio de carga de imagenes xa usuarios, hospitales y medicos
+- crear servicio 
+  >ng g s services/fileUpload --skipTests
+- ir pages/perfil.ts -> inyecto servicio e implemento metodo cambiarImagen()
+- ir pages/perfil.html
+# Mostrar vista previa de la imagen
+- ir usuario.model.ts 
+- ir perfil.html y perfil.ts
+# Mensajes al usuario
+- ir perfil.ts
+# Bloquear cambiar email si logado como usuario de Google
+- ir pages/perfil.html
+- ir BACKEND controllers/usuarios.js

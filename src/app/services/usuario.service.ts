@@ -2,8 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, NgZone } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
-import { catchError, map, tap } from 'rxjs/operators'
-
+import { catchError, delay, map, tap } from 'rxjs/operators'
 
 import { environment } from 'src/environments/environment';
 
@@ -36,10 +35,19 @@ export class UsuarioService {
     return localStorage.getItem('token_a_fh') || '';
   }
 
-  //getter para recuperar uid desde token
-  // get uid(): string {
-  //   return this.usuario.uid || '';
+  //getter para enviar los headers
+  // get headers() {
+  //   return {
+  //     headers: {
+  //       'x-token': this.token
+  //     }
+  //   }
   // }
+
+  //getter para recuperar uid desde token
+  get uid(): string {
+    return this.usuario.user_id || '';
+  }
 
   googleInit() {
 
@@ -115,10 +123,12 @@ export class UsuarioService {
   }
 
   actualizarPerfil(data: { nombre: string, email: string, role: string }) {
+
     data = {
       ...data,
       role: this.usuario.role
-    }
+    };
+
     return this.http.put(`${base_url}/usuarios/${this.usuario.user_id}`, data, {
       headers: {
         'x-token': this.token
@@ -148,6 +158,55 @@ export class UsuarioService {
         })
       )
 
+  }
+
+  //Cargar usuarios de forma paginada en mantenimiento/usuarios
+  //localhost:3000/api/usuarios?desde=0
+  cargarUsuarios(desde: number = 0) {
+
+    const url = `${base_url}/usuarios?desde=${desde}`;
+    //peticion
+    return this.http.get<{ total: number, usuarios: Usuario[] }>(url, {
+      headers: {
+        'x-token': this.token
+      }
+    })
+      .pipe(
+        //demora de 2sg para ver el spin de carga en tabla de usuarios //QUITAR!
+        delay(250),
+        map(resp => {
+          //console.log(resp);
+          const usuarios = resp.usuarios.map(
+            user => new Usuario(user.nombre, user.email, '', user.img, user.google, user.role, user.user_id))
+          return {
+            total: resp.total,
+            usuarios
+          };
+        })
+      )
+    //OR  return this.http.get(url, this.headers) -> servicio getter arriba
+  }
+
+  //localhost:3000/api/usuarios/600b005a710cad09ac47a791
+  eliminarUsuario(usuario: Usuario) {
+    //console.log('Eliminando...');
+    const url = `${base_url}/usuarios/${usuario.user_id}`;
+    //peticion
+    return this.http.delete(url, {
+      headers: {
+        'x-token': this.token
+      }
+    });
+  }
+
+  //guardar usuario tras cambiar ROLE en tabla de usuarios
+  guardarUsuario(data: Usuario) {
+
+    return this.http.put(`${base_url}/usuarios/${data.user_id}`, data, {
+      headers: {
+        'x-token': this.token
+      }
+    });
   }
 
 }

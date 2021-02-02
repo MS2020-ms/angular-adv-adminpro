@@ -18,15 +18,15 @@ export class SidebarService {
         { titulo: 'rxjs', url: '/dashboard/rxjs' },
       ]
     },
-    // {
-    //   titulo: 'Dashboard 2',
-    //   icono: 'mdi mdi-gauge',
-    //   submenu: [
-    //     { titulo: 'Secondary', url: '/' },
-    //     { titulo: 'ProgressBar', url: '/dashboard/progress' },
-    //     { titulo: 'Graficas', url: '/dashboard/grafica1' }
-    //   ]
-    // },
+    {
+      titulo: 'Mantenimiento',
+      icono: 'mdi mdi-folder-lock-open',
+      submenu: [
+        { titulo: 'Usuarios', url: '/dashboard/usuarios' },
+        { titulo: 'Hospitales', url: '/dashboard/hospitales' },
+        { titulo: 'Medicos', url: '/dashboard/medicos' }
+      ]
+    },
   ];
 
   constructor() { }

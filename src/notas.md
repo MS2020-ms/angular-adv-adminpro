@@ -280,3 +280,69 @@
 # Bloquear cambiar email si logado como usuario de Google
 - ir pages/perfil.html
 - ir BACKEND controllers/usuarios.js
+
+###### OBJETIVOS: 
+# primero crear un Mantenimiento de usuarios completo
+# segundo crear un componente re-utilizable que nos permita subir fácilmente imágenes de Hospitales, Usuarios y Médicos.
+
+### MANTENIMIENTO
+- ir sidebar.service.ts y crear otra lista de mantenimiento
+- ir sidebar.html y establecer icono dinamico <i></i>
+# Crear componente usuarios
+- crear nueva carpeta pages/mantenimientos
+- nueco componente 
+  >ng g c pages/mantenimientos/usuarios --skipTests -is
+- creo nueva ruta en pages.routing.ts
+- creo card xa en usuarios.html (desde original|table-basic|bordered Table)
+- creo mi plantilla.txt para proximos mantenemientos
+# Cargar y Mostrar usuarios de forma paginada
+- ir usuarios.service.ts crear metodo cargarUsuarios()
+- ir usuarios.ts y hago peticion dentro de ngOnInit()
+- ir usuarios.html
+# Paginar los usuarios prev< >next
+- ir usuarios.service.ts
+- ir usuarios.ts -> cambiarPagina()
+- ir usuarios.html -> asignar a los botones y mostar botones condicionados si es usuario google o normal
+# Busqueda de usuarios
+- creo nuevo servicio >ng g s services/busquedas --skipTests
+- ir usuarios.ts
+- ir usuarios.html campo de texto input type:text
+# Borrar usuario
+- ir usuarios.service.ts -> eliminarUsuario() ruta
+- ir usuarios.ts -> eliminarUsuario()
+- ir usuarios.html 
+### No borrarse a uno mismo
+- SweetAlert en usuario.ts
+# Actualizar el rol del usuario
+- ir usuarios.html 
+- ir usuarios.ts -> cambiarRole()
+- ir usuarios.service.ts -> guardarUsuario() ruta
+# Modal (como bootstrap) para la carga de imagenes (editar imagen en mantenimiento usuarios - tabla)
+- crear nuevo componente components/modalImagen
+  >ng g c components/modalImagen --skipTests -is
+- exportar ModalImagenComponent en components.module.ts
+- coloco <app-modal-imagen> en pages.components.html (siempre utilizable en pages)
+- ir modal-imagen.html pego plantilla desde original/main/ui-modals
+  definir class="fondo-modal-imagen" y "ocultar" en styles.css
+- ir modal-imagen.ts para definir cerrarModal()
+
+- Crear nuevo SERVICIO para manejar el modal, lo voy reutilizar en mantenimiento usuarios-hospitales-medicos
+ >ng g s services/modalImagen --skipTests
+- ir modal-imagen.service
+- ir modal-imagen.ts y html
+
+- Cuando click en imagen de tabla en mantenimiento/usuarios quiero abrir el modal:
+- ir pages/mantenimientos/usuarios 
+  -> usuarios.ts xa inyectar servicio
+  -> usuarios.html (click) en imagen xa abrir modal y editarla
+
+- Cargar imagen desde el Modal:
+- ir modal-imagen.ts y html
+- ir modal-imagen.service.ts -> abrirModal()
+- ir usuarios.ts -> abrirModal()
+
+- Actualizar imagen de usuario desde Modal:
+- copiar subirImagen() desde perfil.component.ts y pegar en modal-imagen.ts
+- creo un Observable en modal-imagen.service -> public nuevaImagen
+  y uso en modal.imagen.ts en subirImagen()
+- ir usuarios.ts implemento ngOnInit()  

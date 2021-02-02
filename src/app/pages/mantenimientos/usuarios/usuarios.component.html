@@ -1,0 +1,104 @@
+<div class="row animated fadeIn fast">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+
+                <!-- No como formulario reactivo sino por referencia local #txtTermino -->
+                <!-- implemento (keyup) -->
+                <input type="text" class="form-control" placeholder="Buscar usuario..."
+                    (keyup)="buscar(txtTermino.value)" #txtTermino />
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- animated fadeIn fast para ejecutar rapida al entrar en ruta o recargar -> libreria css.animated -->
+<!-- el spin: se carga al empezar y desaparece al terminar la carga de usuarios -->
+<div class="row animated fadeIn fast" *ngIf="cargando">
+    <div class="col-12">
+        <div class="alert alert-info text-center">
+            <h4 class="alert-heading">Cargando...</h4>
+            <!-- spin en movimiento -->
+            <i class="fa fa-spin fa-refresh fa-2x"></i>
+            <p class="mb-0">Por favor espere</p>
+        </div>
+    </div>
+</div>
+
+<!-- Template: Tabla desde original - table-basic - bordered Table -->
+<!-- la tabla: se carga al empezar y desaparece al terminar la carga de usuarios -->
+<div class="row animated fadeIn fast" *ngIf="!cargando">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Total de Usuarios ({{totalUsuarios}}) - ({{desde}})</h4>
+                <h6 class="card-subtitle">Usuarios registrados en la Aplicación</h6>
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <!-- estilo w100 con ancho fijo de 100px -->
+                                <th class="w100">Avatar</th>
+                                <th>Correo</th>
+                                <th>Nombre</th>
+                                <th class="w140">Role</th>
+                                <th class="w100">Auth</th>
+                                <th class="text-nowrap w100">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- bucle ngFor de los usuarios -->
+                            <tr *ngFor="let usuario of usuarios">
+                                <td class="text-center">
+                                    <!-- (click) abre el modal xa poder editarla-->
+                                    <!-- clase w40 y cursor -->
+                                    <img [src]="usuario.imagenUrl" alt="Avatar de imagen" class="w40 cursor"
+                                        (click)="abrirModal(usuario)">
+                                </td>
+                                <td>{{usuario.email}}</td>
+                                <td>{{usuario.nombre}}</td>
+
+                                <td>
+                                    <!-- para asignarle en el select a cada uno su role [(ngModel)] y creo metodo para cambiar ROLE-->
+                                    <select class="form-control" [(ngModel)]="usuario.role"
+                                        (change)="cambiarRole(usuario)">
+                                        <option value="ADMIN_ROLE">Admin</option>
+                                        <option value="USER_ROLE">User</option>
+                                    </select>
+                                </td>
+
+                                <td>
+                                    <!-- Condicionados a mostrarse si son usuarios de google o normal -->
+                                    <span *ngIf="usuario.google" class="label label-danger">Google</span>
+                                    <span *ngIf="!usuario.google" class="label label-info">Normal</span>
+                                </td>
+
+                                <!-- text-center -> centrar -->
+                                <td class="text-nowrap text-center">
+
+                                    <!-- Antiguo lapiz xa editar -->
+                                    <!-- <a data-toggle="tooltip" data-original-title="Editar"> <i
+                                            class="fa fa-pencil text-inverse m-r-10"></i>
+                                    </a> -->
+
+                                    <!-- implemento metodo (click) -->
+                                    <a data-toggle="tooltip" data-original-title="Borrar" class="cursor"
+                                        (click)="eliminarUsuario(usuario)">
+                                        <i class="fa fa-close text-danger"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- no se muestran si hago busqueda en el campo busqueda -->
+                <div *ngIf="txtTermino.value.length === 0">
+                    <button (click)="cambiarPagina(-5)" class="btn btn-secondary">Anteriores</button>
+                    &nbsp;
+                    <button (click)="cambiarPagina(+5)" class="btn btn-secondary">Siguientes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -16,6 +16,7 @@ import { AccountSettingsComponent } from './account-settings/account-settings.co
 import { PromesasComponent } from './promesas/promesas.component';
 import { RxjsComponent } from './rxjs/rxjs.component';
 import { PerfilComponent } from './perfil/perfil.component';
+import { UsuariosComponent } from './mantenimientos/usuarios/usuarios.component';
 
 
 //Modulo independiente de las rutas autenticadas:
@@ -29,7 +30,8 @@ import { PerfilComponent } from './perfil/perfil.component';
     AccountSettingsComponent,
     PromesasComponent,
     RxjsComponent,
-    PerfilComponent
+    PerfilComponent,
+    UsuariosComponent
   ],
   //Los exportos por si necesito estos componentes fuera de este modulo (pages.module.ts)
   exports: [

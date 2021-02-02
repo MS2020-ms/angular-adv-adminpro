@@ -22,17 +22,16 @@ export class Usuario {
     get imagenUrl() {
 
         //console.log(this.img);
-
-        //si estoy logado con google-In  -> toma mi imagen de Google
-        if (this.img.includes('https')) {
+        if (!this.img) {
+            return `${base_url}/uploads/usuarios/no-image`;
+        } else if (this.img.includes('https')) {
+            //si estoy logado con google-In  -> toma mi imagen de Google
             return this.img;
-        }
-
-        if (this.img) {
+        } else if (this.img) {
             return `${base_url}/uploads/usuarios/${this.img}`;
         } else {
             return `${base_url}/uploads/usuarios/no-image`;
         }
-        return ''
     }
+
 }

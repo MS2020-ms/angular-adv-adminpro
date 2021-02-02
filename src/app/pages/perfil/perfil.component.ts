@@ -87,4 +87,5 @@ export class PerfilComponent implements OnInit {
         Swal.fire('Error!', err.error.msg, 'error');
       });
   }
+
 }

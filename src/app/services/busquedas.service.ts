@@ -2,6 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
+import { Hospital } from '../models/hospital.model';
+import { Medico } from '../models/medico.model';
 import { Usuario } from '../models/usuario.model';
 
 const base_url = environment.base_url;
@@ -32,6 +34,14 @@ export class BusquedasService {
     );
   }
 
+  private transformarHospitales(resultados: any[]): Hospital[] {
+    return resultados;
+  }
+
+  private transformarMedicos(resultados: any[]): Medico[] {
+    return resultados;
+  }
+
   //localhost:3000/api/todo/coleccion/usuarios/ivana
   buscar(
     tipo: 'usuarios' | 'medicos' | 'hospitales',
@@ -46,6 +56,14 @@ export class BusquedasService {
           switch (tipo) {
             case 'usuarios':
               return this.transformarUsuarios(resp.usuarios);
+
+            case 'hospitales':
+              //resp.usuarios->asi es como me devuelve la peticion en postman de hospitales?
+              return this.transformarHospitales(resp.usuarios);
+
+            case 'medicos':
+              //resp.usuarios->asi es como me devuelve la peticion en postman de medicos?
+              return this.transformarMedicos(resp.usuarios);
 
             default:
               return [];

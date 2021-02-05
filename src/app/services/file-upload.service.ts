@@ -37,7 +37,7 @@ export class FileUploadService {
       //console.log(resp);
 
       const data = await resp.json();
-      console.log(data);
+      //console.log(data);
 
       if (data.ok) {
         return data.nombreArchivo;

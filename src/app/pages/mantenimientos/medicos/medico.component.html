@@ -1,0 +1,86 @@
+<!-- template desde original/main/form-layout -> Sample Form with the right Icons -->
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+
+                <h4 class="card-title">Nuevo Medico</h4>
+                <h6 class="card-subtitle">Actualizar informacion</h6>
+
+                <!-- Asigno formGroup -->
+                <!-- implemento el submit -->
+                <form class="form p-t-10" [formGroup]="medicoForm" (submit)="guardarMedico()">
+
+                    <!-- *ngIf si existe el medicoSeleccionado aparece, sino no -->
+                    <div class="form-group row" *ngIf="medicoSeleccionado">
+                        <label for="exampleInputuname2">Imagen</label>
+                        <div class="input-group">
+                            <!--  paso por mi pipe imagen -->
+                            <img class="w100" [src]="medicoSeleccionado.img | imagen:'medicos'" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="exampleInputuname2">Nombre</label>
+                        <div class="input-group">
+                            <!-- input asigno formControlName -->
+                            <input formControlName="nombre" class="form-control" type="text" id="exampleInputuname2"
+                                placeholder="Nombre del medico">
+                            <div class="input-group-addon"><i class="ti-user"></i></div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="exampleInputEmail2">Hospital</label>
+                        <div class="input-group">
+                            <!-- input asigno formControlName -->
+                            <select formControlName="hospital" class="form-control">
+                                <!-- entre [] xa enviar parametro -->
+                                <option value="">Selecciona Hospital</option>
+                                <option *ngFor="let hospital of hospitales" [value]="hospital._id">{{hospital.nombre}}
+                                </option>
+
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="text-left">
+                            <!-- si el formulario no es valido el boton desabilizado -->
+                            <!-- entre [] xa enviar parametro -->
+                            <button type="submit" class="btn btn-success waves-effect waves-light m-r-10"
+                                [disabled]="medicoForm.invalid">
+                                <i class="fa fa-save">
+                                    Guardar
+                                </i>
+                            </button>
+
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Imagen del Hospital -->
+    <!-- ngIf: se muestra si hay un hospital seleccionado. Al principio no hay ninguno seleccionado y por tanto es undefined -->
+    <!-- animated fadeIn fast = se muestra mas suavemente -->
+    <div class="col-md-6 animated fadeIn fast" *ngIf="hospitalSeleccionado">
+        <div class="card">
+            <div class="card-body">
+
+                <!-- en ts propiedad hospitalSeleccionado (observable) -->
+                <h4 class="card-title">Hospital</h4>
+                <h6 class="card-subtitle">{{hospitalSeleccionado.nombre}}</h6>
+                <div class="pt-10">
+                    <label for="exampleInputuname2">Imagen</label>
+                </div>
+                <div>
+                    <!--  paso por mi pipe imagen -->
+                    <img class="w100 text-center" [src]="hospitalSeleccionado.img | imagen:'hospitales'" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,8 +1,9 @@
+<!-- campo texto de busqueda-->
 <div class="row animated fadeIn fast">
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-
+                <!-- Buscar Medico por campo de texto -->
                 <!-- No como formulario reactivo sino por referencia local #txtTermino -->
                 <!-- implemento (keyup) -->
                 <input type="text" class="form-control" placeholder="Buscar usuario..."
@@ -14,7 +15,8 @@
 </div>
 
 <!-- animated fadeIn fast para ejecutar rapida al entrar en ruta o recargar -> libreria css.animated -->
-<!-- el spin: se carga al empezar y desaparece al terminar la carga de usuarios -->
+<!-- el spin (loading): se carga al empezar y desaparece al terminar la carga de usuarios -->
+<!-- ngIf="cargando" si cargando esta en true = visible -->
 <div class="row animated fadeIn fast" *ngIf="cargando">
     <div class="col-12">
         <div class="alert alert-info text-center">
@@ -28,6 +30,7 @@
 
 <!-- Template: Tabla desde original - table-basic - bordered Table -->
 <!-- la tabla: se carga al empezar y desaparece al terminar la carga de usuarios -->
+<!-- ngIf="cargando" si NO cargando esta en true = visible -->
 <div class="row animated fadeIn fast" *ngIf="!cargando">
     <div class="col-12">
         <div class="card">

@@ -290,7 +290,7 @@
 - ir sidebar.html y establecer icono dinamico <i></i>
 # Crear componente usuarios
 - crear nueva carpeta pages/mantenimientos
-- nueco componente 
+- nuevo componente 
   >ng g c pages/mantenimientos/usuarios --skipTests -is
 - creo nueva ruta en pages.routing.ts
 - creo card xa en usuarios.html (desde original|table-basic|bordered Table)
@@ -336,13 +336,107 @@
   -> usuarios.ts xa inyectar servicio
   -> usuarios.html (click) en imagen xa abrir modal y editarla
 
-- Cargar imagen desde el Modal:
+# Cargar imagen desde el Modal:
 - ir modal-imagen.ts y html
 - ir modal-imagen.service.ts -> abrirModal()
 - ir usuarios.ts -> abrirModal()
 
-- Actualizar imagen de usuario desde Modal:
+# Actualizar imagen de usuario desde Modal:
 - copiar subirImagen() desde perfil.component.ts y pegar en modal-imagen.ts
 - creo un Observable en modal-imagen.service -> public nuevaImagen
   y uso en modal.imagen.ts en subirImagen()
 - ir usuarios.ts implemento ngOnInit()  
+
+### Mantenimiento de Hospitales y Medicos
+- nuevo componente 
+  >ng g c pages/mantenimientos/hospitales --skipTests -is
+  >ng g c pages/mantenimientos/medicos --skipTests -is
+- defino routerLink en sidebar.html
+- defino ruta en pages.routing.ts
+- pego contenido de plantilla.txt en hospitales.html
+
+- crear nuevo models/hospital.model.ts
+- creo nuevo servicio:
+  >ng g s services/hospital --skipTests
+- ir hospitales.ts llamo a this.hospitalService.cargarHospitales() en ngOnInit()
+
+# Mostar Hospitales en html
+- ir hospitales.ts
+- ir hospitales.html
+
+### Pipes para mostrar imagenes
+# Pipe: xa transformar de forma 'visual' la informacion recibida, no modifica el objeto en si.
+- en el usuario.models tengo un metodo get que construye la img
+  en mi model de hospital no tengo este metodo -> Opcion 2
+- crear nuevo Pipe
+- >ng g pipe pipes/imagen --skipTests
+- crear nuevo Modulo dentro de carpeta pipes para el manejo de todos los pipes
+- >ng g m pipes/pipes --flat
+- borro la importacion del app.modules y pego ImagenPipe en pipes.module.ts
+- importar PipesModule en pages.module.ts
+- ir hospitales.html donde tengo la img y lo paso por mi pipe personalizado
+- copio de usuarios.model el get imagenUrl y lo pego en imagen.pipe.ts
+
+### CRUD de Hospitales
+- ir hospital.service.ts e implemento metodos crearHospital(), actualizarHospital() y borrarHospital()
+- ir hospitales.html creo boton de crear hospital
+  en boton de acciones implemento metodo guardarCambios() y eliminarHospital()
+- en hospitales.ts creo metodo guardarCambios() y eliminarHospital()
+# creacion de Hospitales
+- ir https://sweetalert2.github.io/#input-types ->Input Types / url (copio)
+- ir hospitales.ts creo metodo abrirSweetAlert() y pego
+- ir hospitales.html e implemento metodo (click)="abrirSweetAlert() en crear un hospital
+# Actualizar imagen de hospital desde Modal:
+- ir usuarios.html copio (click)="abrirModal(usuario)"
+- ir hospitales.html en img pegar (click)="abrirModal(hospital)"
+- ir hospitales.ts y definir metodo
+- ir usuarios.ts copiar abrirModal(usuario: Usuario)
+- ir hospitales.ts y pego, primero inyecto servicio modalImagenService
+  me subscribo al Observable nuevaImagen del modal-imagen.service refresca la vista actual mostarndo la imagen actualizada
+# Busqueda de Hospitales
+- ir hospitales.html en caja de texto #txtTermino y metodo (keyup)="buscar(txtTermino.value)"
+- desde usuarios.ts copio buscar() y pego en hospitales.ts
+- ir busquedas.service.ts implemento buscar() xa hospitales
+
+### CRUD de Medicos
+- crear nuevo models/medico.model.ts
+- creo nuevo servicio:
+  >ng g s services/medico --skipTests
+- creo ruta en sidebar.service.ts
+  creo ruta en pages.routing.ts
+- creo nuevo componente para editar cada medico
+  >ng g c pages/mantenimientos/medicos/medico --flat -is
+- copiar plantilla.txt en medicos.html
+# Servicios de Medicos
+- recibir todos los medicos
+  medicos.ts -> inyeccion en servicio y creo metodo cargarMedicos()
+- ir medico.service.ts creo metodo cargarMedicos(), crearMedicos(), actualizarMedicos(), borrarMedicos() -> copiar de hospitales.service
+- ir medicos.ts def cargarMedicos()
+- ir medicos.html 
+# Buscar Medicos mediante campo de texto
+- medicos.html 
+  -> boton editar (pencil) que me dirija a medico xa poder editarlo
+  -> busqueda de medico en campo de texto e implemento metodo buscar()
+- medicos.ts defino metodo buscar()
+- medicos.html creo boton que me lleve a nueva pantalla de creación de nuevo medico mediante routerLink
+# Borrar medicos
+- medicos.html asigno icono de borrar (click)="borrarMedico()"
+- medicos.ts implemento el metodo anteriro
+# Crear nuevo medico o Actualizar
+- Estructura HTML -> medico.html
+- ir medico.ts
+  creo formulario y asigno en html los valores
+# Mostrar imagen e info del hospital
+- ir medico.ts creo propiedad hospitalSeleccionado y en ngOnInit creo un observable sobre el select, almaceno en mi propiedad el elemento seleccionado en selesct
+- ir medico.html
+# Crear medico en BBDD
+- ir medico.service.ts -> crearMedico(medico: { nombre: string, hospital: string }) {
+- ir medico.ts -> guardarMedico
+# Cargar un medico seleccionado
+- Primero creo ruta en Backend getMedicoById
+- ir medico.service -> creo la instruccion getMedicoById
+- ir medico.ts llamo en el ngOnInit al getMedicoById
+# Actualizar un medico
+- ir medico.ts -> guardarMedico() 
+# Cargar imagen del hospital - Bugfix
+- ir medico.ts ->  .pipe(delay(100))

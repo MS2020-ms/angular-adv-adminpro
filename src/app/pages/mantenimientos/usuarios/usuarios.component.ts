@@ -32,7 +32,8 @@ export class UsuariosComponent implements OnInit, OnDestroy {
     private busquedasService: BusquedasService,
     private modalImagenService: ModalImagenService) { }
 
-  //me dessubscribo al Observable
+  //prevengo fuga de memoria o listeners escuchando el cambio de una nueva imagen
+  //me des-subscribo del Observable
   ngOnDestroy(): void {
     this.imagenSubs.unsubscribe();
   }
@@ -43,9 +44,7 @@ export class UsuariosComponent implements OnInit, OnDestroy {
     //me subscribo al Observable nuevaImagen del modal-imagen.service
     //refresca la vista actual mostarndo la imagen actualizada
     this.imagenSubs = this.modalImagenService.nuevaImagen
-      .pipe(
-        delay(100)
-      )
+      .pipe(delay(100))
       .subscribe(img => {
         //console.log(img);
         this.cargarUsuarios()
@@ -88,9 +87,10 @@ export class UsuariosComponent implements OnInit, OnDestroy {
     }
 
     this.busquedasService.buscar('usuarios', termino)
-      .subscribe(resultados => {
-        console.log(resultados)
-        this.usuarios = resultados;
+      .subscribe((resultados: Usuario[]) => {
+        //console.log(resultados)
+        //O Hacer un casteo de tipo Usuario de -> resultados as Usuario[]
+        this.usuarios = resultados as Usuario[];
       });
   }
 
@@ -107,7 +107,7 @@ export class UsuariosComponent implements OnInit, OnDestroy {
     //SWEETALERT2: A confirm dialog, with a function attached to the "Confirm"-button...
     Swal.fire({
       title: 'Borrar usuario?',
-      text: `Estas seguro de borrar al usuaro ${usuario.nombre}`,
+      text: `Estas seguro de borrar al usuario ${usuario.nombre}`,
       icon: 'question',
       showCancelButton: true,
       confirmButtonText: 'Si, borrar!'

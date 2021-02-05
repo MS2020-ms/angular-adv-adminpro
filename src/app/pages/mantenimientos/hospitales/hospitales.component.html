@@ -1,0 +1,103 @@
+<!-- campo texto de busqueda-->
+<div class="row animated fadeIn fast">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <!-- Buscar Medico por campo de texto -->
+                <!-- No como formulario reactivo sino por referencia local #txtTermino -->
+                <!-- implemento (keyup) -->
+                <input type="text" class="form-control" placeholder="Buscar hospital..."
+                    (keyup)="buscar(txtTermino.value)" #txtTermino />
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- spin: loading -->
+<!-- animated fadeIn fast para ejecutar rapida al entrar en ruta o recargar -> libreria css.animated -->
+<!-- *ngIf solo se muestra si esta cargando-->
+<div class="row animated fadeIn fast" *ngIf="cargando">
+    <div class="col-12">
+        <div class="alert alert-info text-center">
+            <h4 class="alert-heading">Cargando...</h4>
+            <!-- spin en movimiento -->
+            <i class="fa fa-spin fa-refresh fa-2x"></i>
+            <p class="mb-0">Por favor espere</p>
+        </div>
+    </div>
+</div>
+
+<!-- Template: Tabla desde original - table-basic - bordered Table -->
+<!-- *ngIf solo se muestra si NO esta cargando-->
+<div class="row" *ngIf="!cargando">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+
+                <div class="row">
+                    <div class="col-8">
+                        <h4 class="card-title">Hospitales ({{hospitales.length}})</h4>
+                        <h6 class="card-subtitle">Hospitales registrados en la Aplicación</h6>
+                    </div>
+                    <div class="col">
+                        <div class="text-right">
+                            <!-- implemento metodo abrirSweetAlert() -->
+                            <button class="btn btn-primary" (click)="abrirSweetAlert()">
+                                <i class="fa fa-hospital-o"></i>
+                                Crear Hospital
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Imagen</th>
+                                <th>Nombre (editar nombre)</th>
+                                <th class="text-nowrap w100">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- bucle ngFor de los hospitales -->
+                            <tr *ngFor="let hospital of hospitales">
+                                <!-- el string que recibo lo paso por mi pipe personalizado (imagen) xa visualizarlo -->
+                                <td class="text-center">
+                                    <!-- {{hospital.img | imagen:'hospitales'}} -->
+                                    <!-- implemento modal xa editar imagen -->
+                                    <img [src]="hospital.img | imagen:'hospitales'" alt="hospital.nombre"
+                                        class="w40 cursor" (click)="abrirModal(hospital)">
+                                </td>
+                                <td>
+                                    <!-- para asignarle en el campo de texto (xa poder editar) a cada uno su nombre [(ngModel)] -->
+                                    <input type="text" class="form-control" placeholder="Nombre del Hospital"
+                                        [(ngModel)]="hospital.nombre" />
+                                </td>
+
+                                <td class="text-nowrap text-center">
+                                    <!-- implemento el metodo (click)="guardarCambios()" -->
+                                    <a data-toggle="tooltip" data-original-title="Guardar cambios" class="cursor"
+                                        (click)="guardarCambios(hospital)">
+                                        <i class="fa fa-save text-inverse m-r-10"></i>
+                                    </a>
+                                    <!-- implemento el metodo (click)="eliminarHospital()" -->
+                                    <a data-toggle="tooltip" data-original-title="Borrar" class="cursor"
+                                        (click)="eliminarHospital(hospital)"> <i class="fa fa-close text-danger"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- OPCIONAL: Paginacion -->
+                <!-- <button class="btn btn-secondary">Anteriores</button>
+                &nbsp;
+                <button class="btn btn-secondary">Siguientes</button> -->
+
+            </div>
+        </div>
+    </div>
+</div>

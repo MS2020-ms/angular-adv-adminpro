@@ -15,6 +15,9 @@ import { PerfilComponent } from './perfil/perfil.component';
 
 //Mantenimiento
 import { UsuariosComponent } from './mantenimientos/usuarios/usuarios.component';
+import { HospitalesComponent } from './mantenimientos/hospitales/hospitales.component';
+import { MedicosComponent } from './mantenimientos/medicos/medicos.component';
+import { MedicoComponent } from './mantenimientos/medicos/medico.component';
 
 
 const routes: Routes = [
@@ -40,8 +43,11 @@ const routes: Routes = [
             //ruta dashboard/promesas  
             { path: 'perfil', component: PerfilComponent, data: { titulo: 'Perfil del usuario' } },
 
-            //MANTENIMIENTOS:
-            { path: 'usuarios', component: UsuariosComponent, data: { titulo: 'Usuarios de aplicacion' } }
+            //### MANTENIMIENTOS:
+            { path: 'usuarios', component: UsuariosComponent, data: { titulo: 'Mantenimiento de Usuarios' } },
+            { path: 'hospitales', component: HospitalesComponent, data: { titulo: 'Mantenimiento de Hospitales' } },
+            { path: 'medicos', component: MedicosComponent, data: { titulo: 'Mantenimiento de Medicos' } },
+            { path: 'medico/:id', component: MedicoComponent, data: { titulo: 'Mantenimiento de Medico' } }
         ]
     },
 ];

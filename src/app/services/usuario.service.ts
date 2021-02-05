@@ -176,6 +176,7 @@ export class UsuarioService {
         delay(250),
         map(resp => {
           //console.log(resp);
+          //creo una instancia de mi usuario (opcion 1)
           const usuarios = resp.usuarios.map(
             user => new Usuario(user.nombre, user.email, '', user.img, user.google, user.role, user.user_id))
           return {

@@ -1,0 +1,108 @@
+<div class="row animated fdeIn fast">
+    <div class="col-4">
+        <div class="card">
+            <div class="card-body">
+                <h3>Usuarios</h3>
+
+                <!-- ngIf si no hay usuarios entonces muestro mensaje -->
+                <div class="alert alert-info" *ngIf="usuarios.length === 0">
+                    <h4 class="alert-heading">No hay usuarios con ese termino</h4>
+                    <p>Buscar de nuevo</p>
+                    <p class="rb-0"></p>
+                </div>
+                <!-- ngIf si hay usuarios entonces muestro esto -->
+                <div class="table-responsive" *ngIf="usuarios.length > 0">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Avatar</th>
+                                <th>Nombre</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- ngFor itero los usuarios -->
+                            <tr *ngFor="let usuario of usuarios" class="animated fadeIn fast">
+                                <td>
+                                    <img class="w40" [src]="usuario.img | imagen:'usuarios'" />
+                                </td>
+                                <td>{{usuario.nombre}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-4">
+        <div class="card">
+            <div class="card-body">
+                <h3>Medicos</h3>
+                <!-- ngIf si no hay medicos entonces muestro mensaje -->
+                <div class="alert alert-info" *ngIf="medicos.length === 0">
+                    <h4 class="alert-heading">No hay medicos con ese termino</h4>
+                    <p>Buscar de nuevo</p>
+                    <p class="rb-0"></p>
+                </div>
+                <!-- ngIf si hay medicos entonces muestro esto -->
+                <div class="table-responsive" *ngIf="medicos.length > 0">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Avatar</th>
+                                <th>Nombre</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- ngFor itero los hospitales -->
+                            <!-- OPCION A si hago click me manda a la pagina mantenimiento del medico -->
+                            <tr *ngFor="let medico of medicos" class="cursor animated fadeIn fast"
+                                (click)="abrirMedico(medico)">
+                                <td>
+                                    <img class="w40" [src]="medico.img | imagen:'medicos'" />
+                                </td>
+                                <td>{{medico.nombre}}</td>
+                                <!-- OPCION B -->
+                                <!-- <a [routerLink]="['(dashboard/medico', medico._id]">{{medico.nombre}}</a> -->
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-4">
+        <div class="card">
+            <div class="card-body">
+                <h3>Hospitales</h3>
+                <!-- ngIf si no hay hospitales entonces muestro mensaje -->
+                <div class="alert alert-info" *ngIf="hospitales.length === 0">
+                    <h4 class="alert-heading">No hay hospitales con ese termino</h4>
+                    <p>Buscar de nuevo</p>
+                    <p class="rb-0"></p>
+                </div>
+                <!-- ngIf si hay hospitales entonces muestro esto -->
+                <div class="table-responsive" *ngIf="hospitales.length > 0">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Imagen</th>
+                                <th>Nombre</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- ngFor itero los hospitales -->
+                            <tr *ngFor="let hospital of hospitales" class="animated fadeIn fast">
+                                <td>
+                                    <img class="w40" [src]="hospital.img | imagen:'hospitales'" />
+                                </td>
+                                <td>{{hospital.nombre}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

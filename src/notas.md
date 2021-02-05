@@ -440,3 +440,37 @@
 - ir medico.ts -> guardarMedico() 
 # Cargar imagen del hospital - Bugfix
 - ir medico.ts ->  .pipe(delay(100))
+
+### Busqueda global en toda la app
+- pagina ppal. -> lupa
+- ir shared/header.html
+- ir shared.module -> importar FormsModule
+- ir shared/header.ts -> implemento buscar()
+# crear nuevo componente
+- encargado de recibir el texto por url (ruta) y realizar la busqueda
+  >ng g c pages/busqueda --skipTests -is
+- definir ruta en pages.routing.ts
+- ir busqueda.ts
+- ir header.ts mando el texto del campo busqueda al url
+- ir busqueda.html
+# mostar la informacion de la busqueda
+- implementar busquedas.service la ruta localhost:3000/api/todo/:termino -> busquedaGlobal()
+- ir busqueda.ts -> creo arrays y busquedaGlobal()
+- ir busqueda.html 
+
+### Dependiendo ROLE reegresar el menu de Mantenimiento -> desde BACKEND
+    Y solo si es ADMIN pueda ver mantenimiento de usuarios
+- Primero ir Backend
+- ir usuarios.service -> guardo el menu en LS -> guardarEnLocalStorage()
+- ir sidebar.service -> cargarMenu()
+- ir pages.ts en ngOnInit cargar this.sidebarService.cargarMenu();
+
+### ADMIN GUARD
+- crear un Guard
+  >ng g guard guards/admin --skipTests
+  (x) CanActivate
+- ir usuario.service -> defino un getter get role()
+- ir admin.guard 
+- ir pages.routing -> implemento el Guard -> AdminGuard en la ruta /usuarios
+
+### Validar el ADMIN_ROLE en BACKEND

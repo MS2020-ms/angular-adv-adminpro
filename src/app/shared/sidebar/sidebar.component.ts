@@ -11,13 +11,14 @@ import { UsuarioService } from 'src/app/services/usuario.service';
 })
 export class SidebarComponent implements OnInit {
 
-  public menuItems: any[];
+  //public menuItems: any[];
   public usuario: Usuario;
 
   //inyecto el servicio
-  constructor(private sidebarService: SidebarService, private usuarioService: UsuarioService) {
+  constructor(public sidebarService: SidebarService,
+    private usuarioService: UsuarioService) {
 
-    this.menuItems = sidebarService.menu;
+    //this.menuItems = sidebarService.menu;
     //console.log(this.menuItems);
 
     //Los datos del usuario

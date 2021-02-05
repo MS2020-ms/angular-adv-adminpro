@@ -42,6 +42,13 @@ export class BusquedasService {
     return resultados;
   }
 
+  //localhost:3000/api/todo/:termino
+  busquedaGlobal(termino: string) {
+    const url = `${base_url}/todo/${termino}`;
+    //peticion
+    return this.http.get(url, this.headers);
+  }
+
   //localhost:3000/api/todo/coleccion/usuarios/ivana
   buscar(
     tipo: 'usuarios' | 'medicos' | 'hospitales',

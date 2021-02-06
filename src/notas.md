@@ -474,3 +474,22 @@
 - ir pages.routing -> implemento el Guard -> AdminGuard en la ruta /usuarios
 
 ### Validar el ADMIN_ROLE en BACKEND
+
+### LAZYLOAD - Carga de Modulos (auth, pages:(muy grande), shared, pipes)
+- cargamos las rutas del pages.routing como LAZYLOAD
+- creo nuevo modulo de rutas (xa cargue las rutas como lazyload)
+  >ng g m pages/childRoutes --flat
+- cortar los import de comonentes del pages.routing a el child-routes.module
+- cortar las rutas de comonentes del pages.routing a el child-routes.module
+- en pages.routing anado -> canLoad: [AuthGuard],
+  en auth.guard implementar canLoad()
+  solo se cargan las rutas si el usuario tiene el token valido
+
+### Generar el build de produccion xa poder subir a Heroku
+- ir a enviroments/enviroment.prod.ts
+  url de produccion de mi app subida a heroku -> https://adminpro-backend-ms.herokuapp.com/api
+- generar build de produccion
+  >ng build --prod
+  crea nueva carpeta dist
+- copiar todo contenido de carpeta dist (asset, main, runtime...) y pegar en BACKEND dentro de la carpeta public (primero cambiar el nombre del archivo index.html existente por index-ms.html)
+# Ir -> Backend
